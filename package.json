@@ -1,0 +1,25 @@
+{
+  "name": "serviceStack",
+  "version": "0.1.0",
+  "description": "A connect-like dnode service stack for event based service logic",
+  "main": "serviceStack.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bpostlethwaite/serviceStack.git"
+  },
+  "keywords": [
+    "services",
+    "dnode",
+    "stack"
+  ],
+  "author": "Ben Postlethwaite",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "dnode": "~1.0.2",
+    "winston": "~0.6.2"
+  }
+}
