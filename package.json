@@ -1,10 +1,10 @@
 {
   "name": "serviceStack",
   "version": "0.1.0",
-  "description": "A connect-like dnode service stack for event based service logic",
-  "main": "serviceStack.js",
+  "description": "A connect-like dnode service stack for event-based service logic over sockets",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tap test/*"
   },
   "repository": {
     "type": "git",
@@ -15,11 +15,18 @@
     "dnode",
     "stack"
   ],
-  "author": "Ben Postlethwaite",
-  "license": "MIT",
-  "readmeFilename": "README.md",
   "dependencies": {
     "dnode": "~1.0.2",
     "winston": "~0.6.2"
-  }
+  },
+  "devDependencies": {
+    "tape": "~0.1.1",
+    "tap": "~0.3.3"
+  },
+  "author": {
+    "name": "Ben Postlethwaite",
+    "email": "post.ben.here@gmail.com",
+    "url": "benpostlethwaite.ca"
+  },
+  "license": "MIT"
 }
