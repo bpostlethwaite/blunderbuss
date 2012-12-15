@@ -18,6 +18,9 @@ module.exports = function () {
     , eventqueue = []
 
   that.stack = []
+  that.count = 0
+  that.ready = false
+
 
   function logger(service, bool) {
     /*
@@ -45,6 +48,8 @@ module.exports = function () {
      */
     if (that.log)
       log(service, err)
+    console.error("error in", service, err)
+    throw err
   }
 
   function next(service, data) {
@@ -57,18 +62,22 @@ module.exports = function () {
       , i
 
     i = that.stack.indexOf(service)
-    if (i > 0) {
+    if (i >= 0) {
       i += 1 // shift for next serice
       if(i === that.stack.length)
         nextService = "finish"
       else
         nextService =  that.stack[i]
     }
-
     ev.emit(nextService, data)
-
   }
 
+  function servicecount() {
+    that.count++
+    if (that.count === that.stack.length) {
+      that.ready = true
+    }
+  }
 
   function register(serviceObj) {
     /*
@@ -94,7 +103,7 @@ module.exports = function () {
      */
     that.stack.forEach( function (service) {
       that[service].d.on("remote", function(remote) {
-        eventqueue.push(service)
+        servicecount()
         ev.on( service, function (data) {
           remote.service(data, function (err, data) {
             if (err) return handle(service, err)
@@ -107,18 +116,35 @@ module.exports = function () {
     })
   }
 
-
-
   function start(data) {
-    if(!data)
-      data = {}
-    ev.emit( that.stack[0], data)
-    console.log("emitting " + that.stack[0])
+    /*
+     * Initiate service chain with data.
+     * If event listeners not yet established
+     * try on next tick.
+     */
+    function holdstart () {
+      if(!data)
+        data = {}
+      if(that.ready)
+        ev.emit( that.stack[0], data)
+      else
+        process.nextTick(holdstart)
+    }
+    holdstart()
+  }
+
+  function finish(cb) {
+    /*
+     * Allow user to supply a callback
+     * on data at end of service chain.
+     */
+    ev.on("finish", cb)
   }
 
   that.register = register
   that.logger = logger
   that.start = start
+  that.finish = finish
 
   return that
 

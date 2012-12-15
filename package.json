@@ -1,14 +1,14 @@
 {
-  "name": "serviceStack",
-  "version": "0.1.0",
-  "description": "A connect-like dnode service stack for event-based service logic over sockets",
+  "name": "blunderbuss",
+  "version": "0.1.1",
+  "description": "A connect-like dnode service stack for linking distributed event-based service logic",
   "main": "index.js",
   "scripts": {
     "test": "tap test/*"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/bpostlethwaite/serviceStack.git"
+    "url": "git://github.com/bpostlethwaite/blunderbuss.git"
   },
   "keywords": [
     "services",
