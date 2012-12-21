@@ -1,6 +1,6 @@
 var ss = require("../")()
   , dnode = require('dnode')
-  , assert = require('assert')
+  , test = require("tape")
 
 /************************************/
 // Define Service Functions

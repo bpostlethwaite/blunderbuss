@@ -149,3 +149,10 @@ module.exports = function () {
   return that
 
 }
+// ```
+// fs.stat(filename, onstat(filename));
+
+// function onstat(filename) { return function(er, stat) {
+// // now I have the stat results, and the filename.
+// }}
+// ```
