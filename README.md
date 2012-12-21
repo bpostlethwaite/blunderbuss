@@ -41,7 +41,7 @@ server3.listen(5003)
 ```
 
 Though you would usually want to define
-these services independantly in their own
+these services independently in their own
 processes or machines.
 
 On the `Client`, do:
