@@ -22,24 +22,21 @@ module.exports = function () {
   that.ready = false
 
 
-  function logger(service, bool) {
+  function logger(bool) {
     /*
      * Turns on logging, eventually
      * add functionality to customize
      * Winston through this interface
      * Or just expose winston directly.
      */
-    if(typeof service === "boolean")
-      that.log = service
-    else
-      that.service.log = bool
+    that.log = bool
   }
 
-  function log(service, data) {
+  function log(service, info) {
     /*
      * log data through winston
      */
-    winston.info(service, data)
+    winston.info(service, info)
   }
 
   function handle(service, err) {
@@ -103,7 +100,7 @@ module.exports = function () {
      */
     that.stack.forEach( function (service) {
       that[service].d.on("remote", function(remote) {
-        servicecount()
+        servicecount() // set listeners before sending "start" event
         ev.on( service, function (data) {
           remote.service(data, function (err, data) {
             if (err) return handle(service, err)

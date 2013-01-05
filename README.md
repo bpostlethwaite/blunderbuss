@@ -33,10 +33,12 @@ var server = dnode({
   service : doubleIt
 })
 server.listen(5001)
+
 var server2 = dnode({
   service : dupField
 })
 server2.listen(5002)
+
 var server3 = dnode({
   service : sumFields
 })
