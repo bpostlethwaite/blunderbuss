@@ -1,6 +1,6 @@
 {
   "name": "blunderbuss",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A connect-like dnode service stack for linking distributed event-based service logic",
   "main": "index.js",
   "scripts": {
